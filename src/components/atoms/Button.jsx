@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Button({ children, variant = "primary", size = "md", className = "", ...props }) {
-    // Mapear las variantes de Bootstrap a clases CSS nativas
+    //Mapear las variantes de Bootstrap a clases CSS nativas
     const variantClasses = {
         primary: "btn-primary",
         secondary: "btn-secondary", 
@@ -21,7 +21,7 @@ function Button({ children, variant = "primary", size = "md", className = "", ..
         "outline-dark": "btn-outline-dark"
     };
 
-    // Mapear los tamaños de Bootstrap a clases CSS nativas
+    //Mapear los tamaños de Bootstrap a clases CSS nativas
     const sizeClasses = {
         sm: "btn-sm",
         md: "",

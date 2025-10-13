@@ -55,7 +55,7 @@ function CheckoutForm({ onSubmit, onCancel }) {
             [name]: value
         }));
         
-        // Limpiar error cuando el usuario empiece a escribir
+        //Limpiar error cuando el usuario empiece a escribir
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,

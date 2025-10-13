@@ -4,7 +4,7 @@ const productosOF = [
     name: 'Jordan 1 High OG', 
     description: 'Comoda zapatilla air jordan 1, con colores que destacan los tiempos OG', 
     price: 79990, 
-    image: 'https://www.kickgame.co.uk/cdn/shop/products/air-jordan-1-retro-high-og-gs-575441-030_1.png?v=1659092488' // URL de la imagen
+    image: 'https://www.kickgame.co.uk/cdn/shop/products/air-jordan-1-retro-high-og-gs-575441-030_1.png?v=1659092488' //URL de la imagen
     },
     {
     id: 302,

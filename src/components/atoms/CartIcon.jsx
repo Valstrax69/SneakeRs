@@ -10,7 +10,7 @@ function CartIcon({ className = "" }) {
     };
 
     const handleDebugClick = (e) => {
-        e.stopPropagation(); // Evitar que navegue al carrito
+        e.stopPropagation(); //Evitar que navegue al carrito
         debugCart();
     };
 

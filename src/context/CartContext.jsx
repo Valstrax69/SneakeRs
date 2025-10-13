@@ -1,12 +1,12 @@
 import { createContext, useContext, useReducer, useEffect } from 'react';
 
-// Crear el contexto
+//Crear el contexto
 const CartContext = createContext();
 
-// Clave para localStorage
+//Clave para localStorage
 const CART_STORAGE_KEY = 'sneakers_cart';
 
-// Función para calcular totales
+//Funcion para calcular totales
 function calculateTotals(state) {
     const itemCount = state.items.reduce((total, item) => total + item.quantity, 0);
     const total = state.items.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -18,14 +18,14 @@ function calculateTotals(state) {
     };
 }
 
-// Función para obtener el estado inicial desde localStorage
+//Funcion para obtener el estado inicial desde localStorage
 const getInitialState = () => {
     try {
         const savedCart = localStorage.getItem(CART_STORAGE_KEY);
         if (savedCart) {
             const parsedCart = JSON.parse(savedCart);
             console.log('Loading cart from localStorage:', parsedCart);
-            // Recalcular totales para asegurar consistencia
+            
             return calculateTotals(parsedCart);
         }
     } catch (error) {
@@ -33,18 +33,17 @@ const getInitialState = () => {
     }
     
     console.log('Using default initial state');
-    // Estado inicial por defecto
     return {
-        items: [], // Array de productos en el carrito
-        total: 0,  // Total del carrito
-        itemCount: 0 // Cantidad total de items
+        items: [], //Array de productos en el carrito
+        total: 0,  //Total del carrito
+        itemCount: 0 //Cantidad total de items
     };
 };
 
-// Estado inicial del carrito
+//Estado inicial del carrito
 const initialState = getInitialState();
 
-// Tipos de acciones
+//Tipos de acciones
 const CART_ACTIONS = {
     ADD_ITEM: 'ADD_ITEM',
     REMOVE_ITEM: 'REMOVE_ITEM',
@@ -52,14 +51,14 @@ const CART_ACTIONS = {
     CLEAR_CART: 'CLEAR_CART'
 };
 
-// Función reducer para manejar las acciones del carrito
+//Funcion reducer para manejar las acciones del carrito
 function cartReducer(state, action) {
     switch (action.type) {
         case CART_ACTIONS.ADD_ITEM:
             const existingItem = state.items.find(item => item.id === action.payload.id);
             
             if (existingItem) {
-                // Si el producto ya existe, aumentar la cantidad
+                //Si el producto ya existe, aumentar la cantidad
                 const updatedItems = state.items.map(item =>
                     item.id === action.payload.id
                         ? { ...item, quantity: item.quantity + 1 }
@@ -67,7 +66,7 @@ function cartReducer(state, action) {
                 );
                 return calculateTotals({ ...state, items: updatedItems });
             } else {
-                // Si es un producto nuevo, agregarlo con cantidad 1
+                //Si es un producto nuevo, agregarlo con cantidad 1
                 const newItem = { ...action.payload, quantity: 1 };
                 const updatedItems = [...state.items, newItem];
                 return calculateTotals({ ...state, items: updatedItems });
@@ -82,7 +81,7 @@ function cartReducer(state, action) {
                 item.id === action.payload.id
                     ? { ...item, quantity: Math.max(0, action.payload.quantity) }
                     : item
-            ).filter(item => item.quantity > 0); // Eliminar items con cantidad 0
+            ).filter(item => item.quantity > 0); //Eliminar items con cantidad 0
             return calculateTotals({ ...state, items: updatedItems });
 
         case CART_ACTIONS.CLEAR_CART:
@@ -98,11 +97,11 @@ function cartReducer(state, action) {
     }
 }
 
-// Provider del contexto
+//Proovedor de informacion del carrito
 export function CartProvider({ children }) {
     const [state, dispatch] = useReducer(cartReducer, initialState);
 
-    // Guardar en localStorage cada vez que el estado cambie
+    //Guarda en localStorage cada vez que el estado cambie
     useEffect(() => {
         console.log('CartContext state changed:', state);
         try {
@@ -112,7 +111,7 @@ export function CartProvider({ children }) {
         }
     }, [state]);
 
-    // Funciones para manipular el carrito
+    //Funciones para manipular el carrito
     const addToCart = (product) => {
         dispatch({
             type: CART_ACTIONS.ADD_ITEM,
@@ -139,7 +138,7 @@ export function CartProvider({ children }) {
         dispatch({
             type: CART_ACTIONS.CLEAR_CART
         });
-        // También limpiar localStorage
+        //Tambien limpiar localStorage
         try {
             localStorage.removeItem(CART_STORAGE_KEY);
             console.log('localStorage cleared');
@@ -148,7 +147,7 @@ export function CartProvider({ children }) {
         }
     };
 
-    // Función para debuggear el localStorage (opcional)
+    //Funcion para debuggear el localStorage 
     const debugCart = () => {
         console.log('Estado actual del carrito:', state);
         console.log('localStorage:', localStorage.getItem(CART_STORAGE_KEY));
@@ -170,7 +169,7 @@ export function CartProvider({ children }) {
     );
 }
 
-// Hook personalizado para usar el contexto
+//Hook personalizado para usar el contexto, CONTROL DE CARRITO ENTRE PAGINAS
 export function useCart() {
     const context = useContext(CartContext);
     if (!context) {

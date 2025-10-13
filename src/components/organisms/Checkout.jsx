@@ -17,17 +17,17 @@ function Checkout() {
         setIsProcessing(true);
         
         try {
-            // Simular procesamiento de pago
+            //Simular procesamiento de pago
             await new Promise(resolve => setTimeout(resolve, 2000));
             
             console.log('Datos del cliente:', formData);
             console.log('Productos:', items);
             console.log('Total:', total);
             
-            // Limpiar el carrito inmediatamente
+            //Limpiar el carrito inmediatamente
             clearCart();
             
-            // Mostrar confirmación
+            //Mostrar confirmación
             setIsProcessing(false);
             setIsCompleted(true);
             

@@ -8,7 +8,7 @@ function Cart() {
     const { items, total, itemCount, updateQuantity, removeFromCart, clearCart } = useCart();
     const navigate = useNavigate();
 
-    // Debug: mostrar estado actual
+    //mostrar estado actual
     console.log('Cart render - items:', items.length, 'itemCount:', itemCount, 'total:', total);
 
     const handleCheckout = () => {

@@ -10,7 +10,7 @@ function AddToCartButton({ product }) {
         addToCart(product);
         setIsAdded(true);
         
-        // Mostrar mensaje de confirmación por 2 segundos
+        //Mostrar mensaje de confirmación por 2 segundos
         setTimeout(() => {
             setIsAdded(false);
         }, 2000);

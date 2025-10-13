@@ -1,6 +1,6 @@
 function Input({ type = "text", placeholder, value, onChange, className = "", required = false, label, error, name }) {
     const handleChange = (e) => {
-        console.log('Input onChange:', name, e.target.value); // Debug
+        console.log('Input onChange:', name, e.target.value); //Debug
         if (onChange) {
             onChange(e);
         }
